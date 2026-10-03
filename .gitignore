@@ -1,0 +1,9 @@
+# Build output
+bin/
+obj/
+# Editor and OS files
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,20 @@
+# scenario_input_file  fixture_file   (NONE = data file does not exist)
+01_list_and_reports   sample.json
+02_search             sample.json
+03_add_valid          sample.json
+04_add_invalid        sample.json
+05_remove             sample.json
+06_id_after_remove    sample.json
+07_menu_invalid       sample.json
+08_end_of_input       sample.json
+09_empty_catalog_everything empty_array.json
+10_add_then_report    sample.json
+11_mixed_case_reports mixed_case.json
+03_add_valid          NONE
+07_menu_invalid       corrupt.json
+07_menu_invalid       empty_file.json
+07_menu_invalid       missing_year.json
+07_menu_invalid       year_as_text.json
+07_menu_invalid       future_year.json
+07_menu_invalid       duplicate_ids.json
+07_menu_invalid       not_an_array.json
