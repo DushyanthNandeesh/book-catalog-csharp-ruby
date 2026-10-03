@@ -34,7 +34,8 @@ book-catalog-csharp-ruby/
 │   │   ├── Catalog.cs          Collection, add/remove, LINQ search and reports
 │   │   ├── Storage.cs          JSON load/save (System.Text.Json)
 │   │   └── Program.cs          Console menu
-│   └── BookCatalog.Tests/      xUnit unit tests
+│   ├── BookCatalog.Tests/      xUnit unit tests
+│   └── Benchmark/              C# performance benchmark
 ├── ruby/
 │   ├── main.rb                 Console menu (start here)
 │   ├── book.rb                 Book class and BookGroup struct
@@ -42,6 +43,8 @@ book-catalog-csharp-ruby/
 │   ├── catalog.rb              Collection, add/remove, block-based search and reports
 │   ├── storage.rb              JSON load/save (json library)
 │   └── test/                   Minitest unit tests
+├── benchmark/
+│   └── benchmark.rb            Ruby performance benchmark
 ├── tests/
 │   ├── compare.sh              Runs both programs on the same input and compares results
 │   ├── scenarios.txt           List of test scenarios
@@ -214,6 +217,31 @@ Each language has 17 matching unit tests covering validation, adding, removing, 
 ### Bug found and fixed during testing
 
 The comparison test showed that Ruby saved an empty catalog as `[` + blank line + `]` while C# saved `[]`. Cause: the `JSON.pretty_generate` method in the Ruby `json` library version we used formats empty arrays differently. Fix: `Storage.to_json_text` in `ruby/storage.rb` writes `[]` directly when the catalog is empty. Both programs now produce identical files.
+
+## Performance benchmark
+
+Both programs include a benchmark that builds a catalog of 100,000 books and times the main operations. The two benchmarks generate identical data and run identical work.
+
+```
+ruby benchmark/benchmark.rb                          (Ruby, from the repository root)
+dotnet run -c Release --project csharp/Benchmark     (C#, from the repository root)
+```
+
+Results from our test machine (Linux, Ruby 3.2.3, .NET 8.0; average of three runs, in milliseconds). Your numbers will differ with your computer, but the pattern should be similar.
+
+| Operation | C# | Ruby |
+|-----------|----|------|
+| Search by title | 2.9 | 28.7 |
+| Genre report | 52.9 | 271.9 |
+| Author report | 33.8 | 200.2 |
+| Load JSON file | 181.0 | 397.6 |
+| Program start and exit | 90 | 63 |
+
+C# was faster on every operation except start-up time. For a normal catalog (a few hundred books) both programs respond instantly.
+
+## Documentation
+
+The `docs/` folder holds the three written deliverables (planning, core functionality, and the final comparison report) and the screenshots, and the final presentation slides.
 
 ## Team
 
