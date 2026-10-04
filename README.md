@@ -227,15 +227,16 @@ ruby benchmark/benchmark.rb                          (Ruby, from the repository 
 dotnet run -c Release --project csharp/Benchmark     (C#, from the repository root)
 ```
 
-Results from our test machine (Linux, Ruby 3.2.3, .NET 8.0; average of three runs, in milliseconds). Your numbers will differ with your computer, but the pattern should be similar.
+Results from our test runs on one MacBook Air (Apple M4, 16 GB; Ruby 4.0.7, .NET 8.0; average of three runs, in milliseconds). Your numbers will differ with your computer, but the pattern should be similar.
 
 | Operation | C# | Ruby |
 |-----------|----|------|
-| Search by title | 2.9 | 28.7 |
-| Genre report | 52.9 | 271.9 |
-| Author report | 33.8 | 200.2 |
-| Load JSON file | 181.0 | 397.6 |
-| Program start and exit | 90 | 63 |
+| Search by title | 6.0 | 44.7 |
+| Genre report | 43.9 | 280.4 |
+| Author report | 20.6 | 207.8 |
+| Load JSON file | 143.4 | 216.6 |
+| Save JSON file | 104.1 | 110.4 |
+| Program start and exit | 92 | 70 |
 
 C# was faster on every operation except start-up time. For a normal catalog (a few hundred books) both programs respond instantly.
 
